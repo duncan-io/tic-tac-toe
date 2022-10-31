@@ -52,7 +52,10 @@ body {
     border-right: var(--ticTacBorders);
 }
 
-.gameSpot {
-    /* height: 100px;
-    width: 100px; */
+.gameSpot:hover{
+    background-color: rgb(201, 196, 196);
+}
+
+.gameSpot:active{
+    background-color: rgb(56, 55, 55);
 }
