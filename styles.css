@@ -1,0 +1,10 @@
+.header {
+    background-color: rgb(204, 202, 202);
+    color: black;
+    text-align: center;
+}
+
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
