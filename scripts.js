@@ -13,9 +13,7 @@
             this.test = console.log("Dom is caching");            
         },
         bindEvents: function(){
-            this.space.forEach(element => {
-            element.addEventListener("click", this.addGamePiece)
-            });
+            this.space.forEach(element => { element.addEventListener("click", this.addGamePiece) });
             this.test = console.log("Events binded")
         },
         addGamePiece: function(){
