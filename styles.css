@@ -52,6 +52,17 @@ body {
     border-right: var(--ticTacBorders);
 }
 
+
+.gameSpot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    font-weight: 900;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
 .gameSpot:hover{
     background-color: rgb(201, 196, 196);
 }

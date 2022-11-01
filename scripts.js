@@ -17,7 +17,13 @@
             this.test = console.log("Events binded")
         },
         addGamePiece: function(){
-            console.log("game piece function running")
+            if(this.textContent == ""){
+                this.append(document.createTextNode("X"));
+            } else {
+                return
+            }
+            
+
         },
     }
 
