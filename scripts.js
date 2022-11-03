@@ -16,7 +16,9 @@
             this.test = console.log("Dom is caching");            
         },
         bindEvents: function(){
-            this.space.forEach(element => { element.addEventListener("click", this.addGamePiece) });
+            this.space.forEach(element => { element.addEventListener("click",
+                this.addGamePiece
+               ) });
             this.test = console.log("Events binded")
         },
         render: function(){
@@ -28,18 +30,22 @@
             console.log("Render is working")
         },
         addGamePiece: function(){
+
+            console.log(this.space)
             if(this.textContent == ""){
-                console.log(this.space)
-                // let arr = Array.from(this.space);
-                // console.log(arr.indexOf(this));
-                // index = this.space.indexOf(this);
-                // this.pieces.splice(index, 1, "X")
-                this.render();
+                
+                let currentState = document.querySelectorAll("[id=gameSpot]");
+                let arr  = Array.from(currentState);
+                let index = arr.indexOf(this);
+                let gamePiece = "X"
+                pieces[index] = "X"
+                this.textContent = gamePiece;
+                console.log(arr)
+                console.log(pieces)
             } else {
                 return
             }
-            
-            seeIfWinner();
+            // seeIfWinner();
 
         },
 
