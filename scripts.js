@@ -1,4 +1,4 @@
-
+//depricated side
  let gameBoard = {
 
         pieces: pieces = ["", "", "", "", "", "", "", "", ""],
