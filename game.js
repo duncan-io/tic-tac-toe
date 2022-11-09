@@ -1,4 +1,3 @@
-//Create Player factory
 const createPlayer = (playerName, sign) => {
     return {playerName, sign}
 }
