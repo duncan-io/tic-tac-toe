@@ -1,57 +1,117 @@
-const gameBoard = ()=>{
+//Create Player factory
+const createPlayer = (playerName, sign) => {
+    return {playerName, sign}
+}
+
+const gameBoard = (()=>{
     const pieces = ["", "", "","", "", "","", "", ""]
 
-    let board = document.querySelectorAll("[id=gameSpot]");
-
+    let board = document.querySelectorAll(".gameSpot");
+    
     board.forEach(element => { 
-        element.addEventListener("click", gameController.addGamePiece)
+        element.addEventListener("click", () => addGamePiece(element))
     })
 
     const newPiece = (index, sign)=>{
-        pieces[index] = sign;
+        console.log("newPiece Firing")
+        if(pieces[index] == ""){
+            pieces[index] = sign;
+        } else{
+            return
+        }
+        
+        let enemySign = "O"
+        let random = Math.floor(Math.random()*10)
+        console.log(random)
+        if(pieces[random] == "" ){
+            console.log("if side")
+            pieces[random] = "O"
+                       
+        } else {
+            console.log("else side")
+            let firstEmpty = pieces.indexOf("");
+            // if (firstEmpty = null){gameController.draw}
+            pieces[firstEmpty] = "O"
+        }
         renderBoard();
-        if (gameController.seeIfWinner(sign)){
-            gameController.presentWinner();
-        };
+        gameController.seeIfWinner(sign);
+        gameController.seeIfWinner(enemySign)
     }
+
+    const addGamePiece = (element) => {
+        let arr = Array.from(board)
+        let index = arr.indexOf(element);
+        let sign = "X"
+        newPiece(index, sign)
+    } 
 
     const renderBoard = () => {
         let i = 0;
             board.forEach(element => {
-                element.append(document.createTextNode(pieces[i]));
+                element.textContent = pieces[i];
                 i++
             })
-    }
+        }
+
+    console.log("gameBoard firing")
+    return {board, newPiece, pieces, renderBoard}
+})();
+
+const gameController = (() =>{
+
+    const playerOne = createPlayer("Player 1", "X")
+    const playerTwo = createPlayer("Player 2", "O")
 
     
-    return {board, newPiece}
-};
-
-const gameController = () =>{
-
-    const addGamePiece = () => {
-        index = gameBoard.board.indexOf(this);
-        sign = "X"
-        gameBoard.newPiece(index, sign)
-    } 
 
     const seeIfWinner = (symbol)=> {
-        if  (pieces[0] === symbol && pieces[1] === symbol && pieces[2] === symbol
-            || pieces[3] === symbol && pieces[4] === symbol && pieces[5] === symbol
-            || pieces[6] === symbol && pieces[7] === symbol && pieces[8] === symbol
-            || pieces[0] === symbol && pieces[3] === symbol && pieces[6] === symbol
-            || pieces[1] === symbol && pieces[4] === symbol && pieces[7] === symbol
-            || pieces[2] === symbol && pieces[5] === symbol && pieces[8] === symbol
-            || pieces[0] === symbol && pieces[4] === symbol && pieces[8] === symbol
-            || pieces[2] === symbol && pieces[4] === symbol && pieces[6] === symbol)
-            return true
+        if  (gameBoard.pieces[0] === symbol && gameBoard.pieces[1] === symbol && gameBoard.pieces[2] === symbol
+            || gameBoard.pieces[3] === symbol && gameBoard.pieces[4] === symbol && gameBoard.pieces[5] === symbol
+            || gameBoard.pieces[6] === symbol && gameBoard.pieces[7] === symbol && gameBoard.pieces[8] === symbol
+            || gameBoard.pieces[0] === symbol && gameBoard.pieces[3] === symbol && gameBoard.pieces[6] === symbol
+            || gameBoard.pieces[1] === symbol && gameBoard.pieces[4] === symbol && gameBoard.pieces[7] === symbol
+            || gameBoard.pieces[2] === symbol && gameBoard.pieces[5] === symbol && gameBoard.pieces[8] === symbol
+            || gameBoard.pieces[0] === symbol && gameBoard.pieces[4] === symbol && gameBoard.pieces[8] === symbol
+            || gameBoard.pieces[2] === symbol && gameBoard.pieces[4] === symbol && gameBoard.pieces[6] === symbol)
+
+            presentWinner(symbol);
+    
         else
             return false
     }
 
-    const presentWinner = () => {
-        
+    const presentWinner = (symbol) => {
+        let winnerMessage = document.getElementById("winnerMessage");
+        let winnerBox = document.getElementById("winnerBox");
+        winnerMessage.textContent = `${symbol} player has won!`;
+        winnerBox.classList.toggle("hidden")
     }
+    console.log("game controller firing")
+    return {seeIfWinner}
+})();
 
-    return {addGamePiece, seeIfWinner}
-}
+const winnerPopUp = (() => {
+    let yesBtn = document.getElementById("yes");
+    let noBtn = document.querySelector(".no");
+    let winnerBox = document.getElementById("winnerBox");
+
+    yesBtn.addEventListener("click", () => {
+        console.log(gameBoard.pieces)
+        for (let i=0; i < 9; i++){
+            gameBoard.pieces[i] = "";
+        }
+        console.log(gameBoard.pieces)
+        gameBoard.renderBoard();
+        winnerBox.classList.toggle("hidden")
+    })
+
+    noBtn.addEventListener("click", () => {
+        console.log("Nobtn firing");
+        let textBox = document.getElementById("textBox");
+        textBox.classList.toggle("hidden");
+        let thxText = document.createElement("h1");
+        let txt = document.createTextNode("Thanks for playing!");
+        thxText.appendChild(txt);
+        winnerBox.appendChild(thxText);
+    })
+})();

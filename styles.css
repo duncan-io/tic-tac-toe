@@ -70,3 +70,48 @@ body {
 .gameSpot:active{
     background-color: rgb(56, 55, 55);
 }
+
+.winner {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(189, 189, 189, 0.534);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textBox {
+    background-color: white;
+    color: black;
+    min-height: 200px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.btns {
+    display: flex;
+    gap: 10px;
+}
+
+.yes, .no {
+    width: 100px;
+    padding: 0px 5px;
+    color: white;
+}
+.yes{
+    background-color: green;
+}
+
+.no {
+    background-color: red;
+}
+
+.hidden {
+    visibility: hidden;
+}
